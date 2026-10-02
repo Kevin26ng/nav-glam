@@ -1,0 +1,112 @@
+export const studies = {
+  gulnaar: {
+    ground: "#6E1E34",
+    depth: "#3C0E1C",
+    lift: "#A84562",
+    thread: "#C4A36A",
+    name: "Gulnaar",
+    motif: "buti",
+  },
+  midnight: {
+    ground: "#16181F",
+    depth: "#07080C",
+    lift: "#32384A",
+    thread: "#C6A15B",
+    name: "Midnight",
+    motif: "stripe",
+  },
+  ivory: {
+    ground: "#E7DFD2",
+    depth: "#CDBFA8",
+    lift: "#F7F1E6",
+    thread: "#795B36",
+    name: "Ivory",
+    motif: "weave",
+  },
+  rani: {
+    ground: "#C2185B",
+    depth: "#7A1240",
+    lift: "#E38AAB",
+    thread: "#F4EFE6",
+    name: "Rani",
+    motif: "buti",
+  },
+  emerald: {
+    ground: "#0E4A3C",
+    depth: "#062820",
+    lift: "#2F8A70",
+    thread: "#D4B483",
+    name: "Emerald",
+    motif: "weave",
+  },
+  royal: {
+    ground: "#1B3A7A",
+    depth: "#0E2148",
+    lift: "#4E74C4",
+    thread: "#E4C98A",
+    name: "Royal",
+    motif: "buti",
+  },
+  mustard: {
+    ground: "#C4892A",
+    depth: "#7A5412",
+    lift: "#E6C27A",
+    thread: "#2A2118",
+    name: "Mustard",
+    motif: "stripe",
+  },
+  turquoise: {
+    ground: "#146E6C",
+    depth: "#0C3E3D",
+    lift: "#7EC8C4",
+    thread: "#F4EFE6",
+    name: "Turquoise",
+    motif: "weave",
+  },
+  magenta: {
+    ground: "#8E2458",
+    depth: "#4E102E",
+    lift: "#D46AA0",
+    thread: "#F2E2C4",
+    name: "Magenta",
+    motif: "buti",
+  },
+  saffron: {
+    ground: "#D4652F",
+    depth: "#8A3414",
+    lift: "#F0A36A",
+    thread: "#2A1A12",
+    name: "Saffron",
+    motif: "weave",
+  },
+  ink: {
+    ground: "#1C1916",
+    depth: "#0A0908",
+    lift: "#3A342C",
+    thread: "#B88A4A",
+    name: "Charcoal",
+    motif: "stripe",
+  },
+  cream: {
+    ground: "#F3E6D4",
+    depth: "#E2CBAA",
+    lift: "#FFF8EE",
+    thread: "#8C6239",
+    name: "Cream",
+    motif: "weave",
+  },
+  maroon: {
+    ground: "#5C1A24",
+    depth: "#2C0C12",
+    lift: "#8E3A46",
+    thread: "#D4B483",
+    name: "Maroon",
+    motif: "buti",
+  },
+} as const;
+
+export type StudyKey = keyof typeof studies;
+
+export type Silhouette = "blouse" | "skirt" | "flare" | "jacket" | "set" | "set2";
+
+export type StudyVariant = "portrait" | "detail" | "textile";
