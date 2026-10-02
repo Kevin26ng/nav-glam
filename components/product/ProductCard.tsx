@@ -63,7 +63,7 @@ export function ProductCard({ product }: { product: Product }) {
             <Link href={`/product/${product.slug}`}>{product.name}</Link>
           </h3>
           <p className="mt-1 text-[0.68rem] uppercase tracking-[0.16em] text-stone">{product.categoryLabel}</p>
-          <p className="mt-1 text-xs text-stone">{product.sizes.join(" · ")}</p>
+          {product.sizes.includes("Free size") ? <p className="mt-1 text-xs text-stone">Free size</p> : null}
         </div>
         <p className="pt-1 text-sm">{formatPrice(product.price)}</p>
       </div>

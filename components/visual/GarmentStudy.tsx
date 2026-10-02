@@ -3,8 +3,8 @@ import { studies, type Silhouette, type StudyKey, type StudyVariant } from "@/li
 
 const viewBoxes: Record<StudyVariant, string> = {
   portrait: "0 0 400 520",
-  detail: "90 70 220 260",
-  textile: "120 160 180 200",
+  detail: "70 40 260 300",
+  textile: "90 80 220 280",
 };
 
 export function GarmentStudy({
@@ -78,21 +78,11 @@ export function GarmentStudy({
       <rect width="400" height="520" filter={`url(#${id}-grain)`} opacity="0.45" />
 
       <g clipPath={`url(#${id}-clip)`}>
-        <SilhouettePaths silhouette={silhouette} fill={`url(#${id}-cloth)`} />
-        <rect
-          width="400"
-          height="520"
-          fill={`url(#${id}-${tone.motif})`}
-          opacity={tone.motif === "buti" ? 0.9 : 0.75}
-        />
+        <SilhouettePaths silhouette={silhouette} fill={tone.lift} opacity={0.22} />
+        <rect width="400" height="520" fill={`url(#${id}-${tone.motif})`} opacity={0.85} />
       </g>
-      <SilhouettePaths
-        silhouette={silhouette}
-        fill="none"
-        stroke={tone.thread}
-        strokeWidth={1.1}
-        strokeOpacity={0.55}
-      />
+      <SilhouettePaths silhouette={silhouette} fill="none" stroke={tone.thread} strokeWidth={1.35} strokeOpacity={0.9} />
+      <DetailLines silhouette={silhouette} stroke={tone.thread} />
 
       <path d="M28 28 H58 M28 28 V58" fill="none" stroke={tone.thread} strokeOpacity="0.7" strokeWidth="0.8" />
       <path d="M372 28 H342 M372 28 V58" fill="none" stroke={tone.thread} strokeOpacity="0.7" strokeWidth="0.8" />
@@ -108,132 +98,79 @@ function SilhouettePaths({
   stroke,
   strokeWidth,
   strokeOpacity,
+  opacity,
 }: {
   silhouette: Silhouette;
   fill?: string;
   stroke?: string;
   strokeWidth?: number;
   strokeOpacity?: number;
+  opacity?: number;
 }) {
-  const props = { fill, stroke, strokeWidth, strokeOpacity, strokeLinejoin: "round" as const };
-  if (silhouette === "blouse") {
-    return (
-      <g {...props}>
-        <path
-          fillRule="evenodd"
-          d="M148 132c0-28 104-28 104 0 8 4 46 14 58 48 6 20-12 32-28 24l-14 22-4 92c0 10-136 10-136 0l-4-92-14-22c-16 8-34-4-28-24 12-34 50-44 58-48z M176 138c0 22 48 22 48 0-14 10-34 10-48 0z"
-        />
-      </g>
-    );
-  }
-  if (silhouette === "jacket") {
-    return (
-      <g {...props}>
-        <path d="M118 128l28-8 18 62-8 150h-48l-16-132-28 16-10-42 46-28z" />
-        <path d="M282 128l-28-8-18 62 8 150h48l16-132 28 16 10-42-46-28z" />
-        <path d="M168 150h64l-6 24c-8 8-44 8-52 0z" fill={fill} />
-      </g>
-    );
-  }
-  if (silhouette === "flare") {
-    return (
-      <g {...props}>
-        <path d="M156 86h88l10 18c36 62 78 150 112 250H34C68 254 110 166 146 104z" />
-        <path d="M164 86h72v16h-72z" />
-      </g>
-    );
-  }
-  if (silhouette === "set2") {
-    return (
-      <g {...props}>
-        <path d="M154 214h92l8 16c28 48 52 110 70 168H84c18-58 42-120 70-168z" />
-        <path
-          fillRule="evenodd"
-          d="M168 78c0-20 64-20 64 0 6 4 30 12 38 34 4 14-8 22-18 16l-8 16-2 48h-84l-2-48-8-16c-10 6-22-2-18-16 8-22 32-30 38-34z M186 84c0 14 28 14 28 0-8 6-20 6-28 0z"
-        />
-      </g>
-    );
-  }
-  if (silhouette === "set") {
-    return (
-      <g {...props}>
-        <path d="M150 250h100l8 14c24 40 48 96 66 150H84c18-54 42-110 66-150z" />
-        <path
-          fillRule="evenodd"
-          d="M176 92c0-16 48-16 48 0 4 3 22 10 28 26 3 10-6 16-14 12l-6 12v36h-64v-36l-6-12c-8 4-17-2-14-12 6-16 24-23 28-26z M188 96c0 10 24 10 24 0-6 5-18 5-24 0z"
-        />
-        <path d="M132 118l16-4 10 36-6 78h-28l-8-70-16 8-6-22 28-16z" />
-        <path d="M268 118l-16-4-10 36 6 78h28l8-70 16 8 6-22-28-16z" />
-      </g>
-    );
-  }
+  const props = { fill, stroke, strokeWidth, strokeOpacity, opacity, strokeLinejoin: "round" as const, strokeLinecap: "round" as const };
+  if (silhouette === "blouse") return <g {...props}><Blouse /></g>;
+  if (silhouette === "jacket") return <g {...props}><Jacket /></g>;
+  if (silhouette === "flare") return <g {...props}><Skirt flare /></g>;
+  if (silhouette === "set2") return <g {...props}><Outfit jacket={false} /></g>;
+  if (silhouette === "set") return <g {...props}><Outfit jacket /></g>;
+  return <g {...props}><Skirt /></g>;
+}
+
+function Blouse() {
   return (
-    <g {...props}>
-      <path d="M150 96h100l10 18c32 58 64 140 86 250H64c22-110 54-192 86-250z" />
-      <path d="M162 96h76v18h-76z" />
-    </g>
+    <path
+      fillRule="evenodd"
+      d="M150 168c-28 10-62 34-78 62-8 16 8 30 28 22l34-16-6 112c28 16 116 16 144 0l-6-112 34 16c20 8 36-6 28-22-16-28-50-52-78-62-16-10-90-10-100 0zM176 164c0 34 48 34 48 0-12 8-36 8-48 0z"
+    />
   );
 }
 
-export function HeroStudy({ className }: { className?: string }) {
+function Jacket() {
   return (
-    <svg viewBox="0 0 900 1100" className={className} role="img" aria-label="नव GLAM campaign study of a set, blouse and jacket" preserveAspectRatio="xMidYMid slice">
-      <defs>
-        <linearGradient id="hero-bg" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#1A1613" />
-          <stop offset="1" stopColor="#0A0908" />
-        </linearGradient>
-        <linearGradient id="hero-rani" x1="0" y1="0" x2="0.6" y2="1">
-          <stop offset="0" stopColor="#E07AA0" />
-          <stop offset="0.35" stopColor="#A61E4D" />
-          <stop offset="1" stopColor="#4C1028" />
-        </linearGradient>
-        <linearGradient id="hero-ivory" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#F7F1E6" />
-          <stop offset="1" stopColor="#CDBFA8" />
-        </linearGradient>
-        <linearGradient id="hero-ink" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#3A342C" />
-          <stop offset="1" stopColor="#120F0D" />
-        </linearGradient>
-        <pattern id="hero-weave" width="8" height="8" patternUnits="userSpaceOnUse">
-          <path d="M0 7 H8" stroke="#E7D3A8" strokeOpacity="0.35" strokeWidth="0.5" />
-        </pattern>
-        <pattern id="hero-buti" width="28" height="28" patternUnits="userSpaceOnUse">
-          <circle cx="7" cy="8" r="1.2" fill="#F4EFE6" opacity="0.45" />
-        </pattern>
-        <filter id="hero-grain">
-          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="2" stitchTiles="stitch" />
-          <feColorMatrix type="saturate" values="0" />
-          <feComponentTransfer>
-            <feFuncA type="linear" slope="0.28" />
-          </feComponentTransfer>
-        </filter>
-        <clipPath id="hero-skirt-clip">
-          <path d="M250 430h250l20 36c70 120 150 280 190 430H70c40-150 110-310 180-430z" />
-        </clipPath>
-        <clipPath id="hero-blouse-clip">
-          <path fillRule="evenodd" d="M330 250c0-62 210-62 210 0 16 10 90 30 112 96 12 40-24 62-54 46l-26 40-8 150c0 18-258 18-258 0l-8-150-26-40c-30 16-66-6-54-46 22-66 96-86 112-96z M392 262c0 40 96 40 96 0-28 18-68 18-96 0z" />
-        </clipPath>
-      </defs>
-      <rect width="900" height="1100" fill="url(#hero-bg)" />
-      <path d="M120 1040 V520 C120 220 760 220 760 520 V1040" fill="none" stroke="#B88A4A" strokeOpacity="0.28" strokeWidth="1.4" />
-      <rect width="900" height="1100" filter="url(#hero-grain)" />
-      <g clipPath="url(#hero-skirt-clip)">
-        <path d="M250 430h250l20 36c70 120 150 280 190 430H70c40-150 110-310 180-430z" fill="url(#hero-rani)" />
-        <rect width="900" height="1100" fill="url(#hero-buti)" />
-        <rect width="900" height="1100" fill="url(#hero-weave)" opacity="0.7" />
-      </g>
-      <path d="M250 430h250l20 36c70 120 150 280 190 430H70c40-150 110-310 180-430z" fill="none" stroke="#F4EFE6" strokeOpacity="0.35" />
-      <g clipPath="url(#hero-blouse-clip)">
-        <path fillRule="evenodd" d="M330 250c0-62 210-62 210 0 16 10 90 30 112 96 12 40-24 62-54 46l-26 40-8 150c0 18-258 18-258 0l-8-150-26-40c-30 16-66-6-54-46 22-66 96-86 112-96z M392 262c0 40 96 40 96 0-28 18-68 18-96 0z" fill="url(#hero-ivory)" />
-        <rect width="900" height="1100" fill="url(#hero-weave)" />
-      </g>
-      <path fillRule="evenodd" d="M330 250c0-62 210-62 210 0 16 10 90 30 112 96 12 40-24 62-54 46l-26 40-8 150c0 18-258 18-258 0l-8-150-26-40c-30 16-66-6-54-46 22-66 96-86 112-96z M392 262c0 40 96 40 96 0-28 18-68 18-96 0z" fill="none" stroke="#795B36" strokeOpacity="0.45" />
-      <path d="M250 300l48-12 28 90-14 210h-70l-22-180-40 22-16-54 70-40z" fill="url(#hero-ink)" stroke="#B88A4A" strokeOpacity="0.8" />
-      <path d="M610 290l-36-8-20 70 10 200h62l18-170 36 16 12-48-62-36z" fill="url(#hero-ink)" stroke="#B88A4A" strokeOpacity="0.65" />
-      <path d="M70 90 H150 M70 90 V170" fill="none" stroke="#B88A4A" strokeOpacity="0.8" />
-      <path d="M830 90 H750 M830 90 V170" fill="none" stroke="#B88A4A" strokeOpacity="0.5" />
-    </svg>
+    <>
+      <path d="M156 156l34-14 12 36-8 132h-46l-10-118-42 18-12-34 48-28z" />
+      <path d="M244 156l-34-14-12 36 8 132h46l10-118 42 18 12-34-48-28z" />
+      <path d="M176 132h48l-4 28c-6 8-34 8-40 0z" />
+    </>
   );
+}
+
+function Skirt({ flare = false }: { flare?: boolean }) {
+  const hem = flare ? { left: 28, right: 372, waistL: 168, waistR: 232 } : { left: 58, right: 342, waistL: 158, waistR: 242 };
+  return (
+    <>
+      <path d={`M${hem.waistL} 118h${hem.waistR - hem.waistL}l8 16c${flare ? 34 : 28} 52 ${flare ? 78 : 58} 150 ${hem.right - hem.waistR - 8} 300H${hem.left}c${hem.waistL - hem.left - 16} -150 ${flare ? 52 : 40} -248 ${hem.waistL - hem.left + 8} -300z`} />
+      <path d={`M${hem.waistL - 6} 96h${hem.waistR - hem.waistL + 12}v28h-${hem.waistR - hem.waistL + 12}z`} />
+    </>
+  );
+}
+
+function Outfit({ jacket = false }: { jacket?: boolean }) {
+  return (
+    <>
+      <path d="M148 268h104l8 14c26 46 52 110 70 176H78c18-66 44-130 70-176z" />
+      <path d="M154 246h92v24h-92z" />
+      <path fillRule="evenodd" d="M162 132c-16 6-38 20-48 38-6 12 6 20 16 14l18-8v78h104v-78l18 8c10 6 22-2 16-14-10-18-32-32-48-38-14-6-62-6-76 0zM178 134c0 20 44 20 44 0-10 6-34 6-44 0z" />
+      {jacket ? (
+        <>
+          <path d="M132 150l22-8 8 28-4 86h-28l-8-78-24 12-8-22 30-18z" />
+          <path d="M268 150l-22-8-8 28 4 86h28l8-78 24 12 8-22-30-18z" />
+        </>
+      ) : null}
+    </>
+  );
+}
+
+function DetailLines({ silhouette, stroke }: { silhouette: Silhouette; stroke: string }) {
+  const props = { fill: "none", stroke, strokeOpacity: 0.45, strokeWidth: 0.8 };
+  if (silhouette === "blouse") {
+    return <path {...props} d="M200 196v92M128 214c18 10 36 14 72 14M272 214c-18 10-36 14-72 14" />;
+  }
+  if (silhouette === "jacket") {
+    return <path {...props} d="M200 160v150M168 188h64" />;
+  }
+  if (silhouette === "flare" || silhouette === "skirt" || silhouette === "set" || silhouette === "set2") {
+    return <path {...props} d="M168 150c-8 90-20 200-36 300M200 140v320M232 150c8 90 20 200 36 300" />;
+  }
+  return null;
 }

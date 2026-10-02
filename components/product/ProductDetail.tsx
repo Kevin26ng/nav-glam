@@ -70,10 +70,12 @@ export function ProductDetail({ product, related }: { product: Product; related:
               <p className="eyebrow">Size</p>
               <Link href="/size-guide" className="text-xs underline">Size guide</Link>
             </div>
-            <div className="mt-3 flex flex-wrap gap-2">
-              {product.sizes.map((size) => (
-                <span key={size} className="border border-ink px-3 py-2 text-sm">{size}</span>
-              ))}
+            <div className="mt-3">
+              {product.sizes.includes("Free size") ? (
+                <span className="border border-ink px-3 py-2 text-sm">Free size</span>
+              ) : (
+                <p className="text-sm text-stone">A measurement chart for this piece has not been published. It will be added with the catalog sheet.</p>
+              )}
             </div>
           </div>
           <div className="mt-6 flex items-center gap-3">

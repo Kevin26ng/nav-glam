@@ -3,7 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { MixMatch } from "@/components/home/MixMatch";
 import { Reveal } from "@/components/motion/Reveal";
 import { ProductCard } from "@/components/product/ProductCard";
-import { GarmentStudy, HeroStudy } from "@/components/visual/GarmentStudy";
+import { GarmentStudy } from "@/components/visual/GarmentStudy";
 import { getFeatured } from "@/lib/catalog";
 import { collections, homeMoods } from "@/lib/collections";
 import { journal } from "@/lib/journal";
@@ -37,23 +37,22 @@ export function HomePage() {
   const featured = getFeatured().slice(0, 8);
   return (
     <>
-      <section className="relative min-h-[100svh] bg-ink text-ivory">
-        <div className="grid min-h-[100svh] lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
-          <div className="relative z-10 flex flex-col justify-end px-5 pb-16 pt-32 md:px-10 md:pb-20 lg:justify-center lg:pt-24">
+      <section className="bg-ink text-ivory">
+        <div className="grid min-h-[100svh] lg:grid-cols-[minmax(0,0.92fr)_minmax(0,1.08fr)]">
+          <div className="order-2 flex flex-col justify-end px-5 pb-14 pt-8 md:px-10 lg:order-1 lg:justify-center lg:pb-0 lg:pt-24">
             <p className="eyebrow text-gold">UH presents</p>
             <h1 className="mt-5 flex flex-wrap items-baseline gap-x-4 gap-y-1">
               <span className="font-deva text-6xl md:text-8xl">नव</span>
               <span className="font-serif text-6xl tracking-[0.12em] md:text-8xl">GLAM</span>
             </h1>
             <p className="mt-6 max-w-md font-serif text-3xl leading-tight md:text-4xl">Heritage, reimagined.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/shop" className="btn">Shop the edit</Link>
               <Link href="/story" className="btn border-ivory/40">Explore the story</Link>
             </div>
           </div>
-          <div className="absolute inset-0 lg:relative">
-            <HeroStudy className="h-full min-h-[100svh] w-full opacity-80 lg:opacity-100" />
-            <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/55 to-ink/10 lg:bg-gradient-to-r lg:from-ink lg:via-ink/20 lg:to-transparent" />
+          <div className="order-1 h-[62svh] lg:h-auto lg:min-h-[100svh]">
+            <GarmentStudy study="gulnaar" silhouette="set" className="h-full w-full" label="Campaign study, three-piece set" />
           </div>
         </div>
       </section>
@@ -101,7 +100,7 @@ export function HomePage() {
           {spread.map((panel) => (
             <figure key={panel.title} className={`snap-start shrink-0 ${panel.wide ? "w-[86vw] md:w-[46vw]" : "w-[78vw] md:w-[28vw]"}`}>
               <div className="h-[70vh] overflow-hidden bg-ink">
-                <GarmentStudy study={panel.study} silhouette={panel.silhouette} variant={panel.wide ? "textile" : "portrait"} className="h-full w-full" label={panel.caption} />
+                <GarmentStudy study={panel.study} silhouette={panel.silhouette} className="h-full w-full" label={panel.caption} />
               </div>
               <figcaption className="mt-4">
                 <p className="font-serif text-3xl">{panel.title}</p>
@@ -123,7 +122,7 @@ export function HomePage() {
               if (!mood) return null;
               return (
                 <Link key={slug} href={`/collections/${slug}`} className="group relative flex min-h-64 items-end overflow-hidden bg-ink p-6 text-ivory">
-                  <GarmentStudy study={mood.study} silhouette="set" variant="textile" className="study-zoom absolute inset-0 h-full w-full opacity-80" label={mood.title} />
+                  <GarmentStudy study={mood.study} silhouette="set" className="study-zoom absolute inset-0 h-full w-full opacity-90" label={mood.title} />
                   <div className="absolute inset-0 bg-ink/35" />
                   <div className="relative">
                     <h3 className="font-serif text-5xl">{mood.title}</h3>
