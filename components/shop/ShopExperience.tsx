@@ -284,7 +284,7 @@ function FilterGroups({
       </fieldset>
       <fieldset>
         <legend className="eyebrow">Availability</legend>
-        <p className="mt-3 text-sm">Every piece in this preview can be added to the bag. Live stock is not connected.</p>
+        <p className="mt-3 text-sm">Open for pre-order. The first batch is cut from the waitlist.</p>
       </fieldset>
     </div>
   );

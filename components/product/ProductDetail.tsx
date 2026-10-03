@@ -5,13 +5,13 @@ import { useState } from "react";
 import { Heart, X } from "lucide-react";
 import { ProductCard } from "@/components/product/ProductCard";
 import { OverlayDialog } from "@/components/ui/OverlayDialog";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import type { Product } from "@/lib/types";
 
 export function ProductDetail({ product, related }: { product: Product; related: Product[] }) {
-  const { add, toggleWish, wished } = useStore();
-  const [qty, setQty] = useState(1);
+  const { toggleWish, wished } = useStore();
   const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState(false);
   const [open, setOpen] = useState<"story" | "details" | "shipping" | "returns">("story");
@@ -57,34 +57,15 @@ export function ProductDetail({ product, related }: { product: Product; related:
               <li key={note} className="border border-ink/15 px-2 py-1 text-[0.68rem] tracking-[0.14em] uppercase">{note}</li>
             ))}
           </ul>
-          <div className="mt-6">
-            <div className="flex items-center justify-between">
-              <p className="eyebrow">Size</p>
-              <Link href="/size-guide" className="text-xs underline">Size guide</Link>
-            </div>
-            <div className="mt-3">
-              {product.sizes.includes("Free size") ? (
-                <span className="border border-ink px-3 py-2 text-sm">Free size</span>
-              ) : (
-                <p className="text-sm text-stone">A measurement chart for this piece has not been published. It will be added with the catalog sheet.</p>
-              )}
-            </div>
-          </div>
-          <div className="mt-6 flex items-center gap-3">
-            <label className="eyebrow" htmlFor="qty">Qty</label>
-            <select id="qty" value={qty} onChange={(event) => setQty(Number(event.target.value))} className="border border-ink/15 bg-transparent px-3 py-2">
-              {[1, 2, 3, 4, 5].map((value) => <option key={value} value={value}>{value}</option>)}
-            </select>
-          </div>
           <div className="mt-6 flex flex-wrap gap-3">
-            <button className="btn btn-solid" onClick={() => add(product.slug, qty)}>Add to bag</button>
-            <Link href="/cart" onClick={() => add(product.slug, qty)} className="btn">Buy now</Link>
+            <WaitlistButton label="Join the Waitlist" productName={product.name} />
+            <WaitlistButton label="Pre-Order Now" productName={product.name} className="btn" />
             <button className="btn" aria-pressed={wished(product.slug)} onClick={() => toggleWish(product.slug)}>
               <Heart size={14} fill={wished(product.slug) ? "currentColor" : "none"} />
               Wishlist
             </button>
           </div>
-          <p className="mt-4 text-xs text-stone">Photographed in {product.colorName}. Bag and wishlist stay on this device. Checkout does not take payment yet.</p>
+          <p className="mt-4 text-xs text-stone">Photographed in {product.colorName}. Size is confirmed when you join the waitlist.</p>
           <div className="mt-10 border-t border-ink/10">
             <Accordion id="story" title="The story" open={open} setOpen={setOpen}>
               <p>{product.description}</p>
@@ -97,10 +78,10 @@ export function ProductDetail({ product, related }: { product: Product; related:
               </ul>
             </Accordion>
             <Accordion id="shipping" title="Shipping" open={open} setOpen={setOpen}>
-              <p>Shipping timelines and charges are not published in this preview. Nothing here is a delivery promise.</p>
+              <p>The first batch ships to waitlist addresses. You will get the dispatch note before anything leaves the studio.</p>
             </Accordion>
             <Accordion id="returns" title="Returns" open={open} setOpen={setOpen}>
-              <p>A returns window is not stated because it has not been supplied. See the refund note before any live checkout.</p>
+              <p>Return terms travel with the pre-order confirmation, before a piece is cut for you.</p>
             </Accordion>
           </div>
         </div>

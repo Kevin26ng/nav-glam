@@ -23,14 +23,6 @@ const columns = [
     ],
   },
   {
-    title: "Social",
-    links: [
-      ["Instagram", "/contact#social"],
-      ["Pinterest", "/contact#social"],
-      ["YouTube", "/contact#social"],
-    ],
-  },
-  {
     title: "Legal",
     links: [
       ["Privacy", "/privacy"],
@@ -50,7 +42,7 @@ export function SiteFooter() {
           <span className="font-deva text-5xl md:text-7xl">नव</span>
           <span className="font-serif text-5xl tracking-[0.14em] md:text-7xl">GLAM</span>
         </p>
-        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {columns.map((column) => (
             <div key={column.title}>
               <p className="eyebrow text-gold">{column.title}</p>
@@ -64,10 +56,7 @@ export function SiteFooter() {
             </div>
           ))}
         </div>
-        <p className="mt-14 max-w-xl text-sm leading-relaxed text-ivory/60">
-          UH presents नव GLAM. The photographs are the current cloth: lehengas, blouses, the Hathi Mor jacket and skirts. Checkout on this site does not take payment yet. Social profiles are not linked yet.
-        </p>
-        <p className="mt-6 text-xs tracking-[0.18em] uppercase text-ivory/45">© {new Date().getFullYear()} UH presents नव GLAM</p>
+        <p className="mt-14 text-xs tracking-[0.18em] uppercase text-ivory/45">© {new Date().getFullYear()} UH presents नव GLAM</p>
       </div>
     </footer>
   );

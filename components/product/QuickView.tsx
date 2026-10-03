@@ -5,11 +5,12 @@ import { X } from "lucide-react";
 import { OverlayDialog } from "@/components/ui/OverlayDialog";
 import { ProductVisual } from "@/components/visual/ProductVisual";
 import { getProduct } from "@/lib/catalog";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 
 export function QuickView() {
-  const { quickView, setQuickView, add, toggleWish, wished } = useStore();
+  const { quickView, setQuickView, toggleWish, wished } = useStore();
   const product = quickView ? getProduct(quickView) : undefined;
   return (
     <OverlayDialog
@@ -34,7 +35,7 @@ export function QuickView() {
               {product.catalogNotes.map((note) => <li key={note}>{note}</li>)}
             </ul>
             <div className="mt-6 flex flex-wrap gap-3">
-              <button className="btn btn-solid" onClick={() => { add(product.slug); setQuickView(null); }}>Add to bag</button>
+              <WaitlistButton label="Join the Waitlist" productName={product.name} />
               <Link href={`/product/${product.slug}`} onClick={() => setQuickView(null)} className="btn">View details</Link>
               <button className="btn" onClick={() => toggleWish(product.slug)}>{wished(product.slug) ? "Wishlisted" : "Wishlist"}</button>
             </div>

@@ -12,7 +12,7 @@ const sections = [
   { id: "color", kicker: "Color", title: "Rang, without the costume.", body: "Rani, forest, midnight, saffron, ivory. Color is the first language, and it is the cloth in the photograph — not a swatch standing in for a garment." },
   { id: "movement", kicker: "Movement", title: "How to style a 3-piece set.", body: "Wear the three together when the room asks for it. For a day out, keep the skirt and a free-size blouse. When the hour changes, add the jacket. Build the same idea in Style it your way." },
   { id: "self", kicker: "Self expression", title: "Wear the story. Make it yours.", body: "The customer is not being cast in a wedding, a festival, or a trend. She is being handed Indian clothes that can sit next to the rest of her wardrobe." },
-  { id: "future", kicker: "The future of Indian dressing", title: "Not old. Not new. Nav.", body: "नव is the direction: forward, still rooted. This page does not invent a founder, a factory, a certificate or a famous wearer. The point of view is the wardrobe." },
+  { id: "future", kicker: "The future of Indian dressing", title: "Not old. Not new. Nav.", body: "नव is the direction: forward, still rooted. Heritage in the cloth. A pre-order model in the business. The wardrobe is the point of view." },
 ];
 
 export default function StoryPage() {

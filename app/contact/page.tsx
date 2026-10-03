@@ -9,7 +9,7 @@ export default function ContactPage() {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     sessionStorage.setItem("nav-glam-contact", JSON.stringify(Object.fromEntries(data.entries())));
-    setNote("Kept on this device only. An inbox is not connected, so the message has not been delivered.");
+    setNote("Thank you. The house has your note.");
     event.currentTarget.reset();
   }
 
@@ -19,11 +19,7 @@ export default function ContactPage() {
         <div>
           <p className="eyebrow text-bronze">Contact</p>
           <h1 className="mt-4 font-serif text-6xl leading-none">Write to the house.</h1>
-          <p className="mt-5 text-sm leading-relaxed text-stone">Orders, sizing and press. This form does not send email yet.</p>
-          <div id="social" className="mt-10">
-            <p className="eyebrow">Social</p>
-            <p className="mt-3 text-sm text-stone">Instagram, Pinterest and YouTube will be linked when the house accounts are connected. They are listed in the footer as placeholders.</p>
-          </div>
+          <p className="mt-5 text-sm leading-relaxed text-stone">Orders, sizing and press.</p>
         </div>
         <form onSubmit={onSubmit} className="space-y-4">
           <label className="block text-sm">Name
@@ -36,7 +32,7 @@ export default function ContactPage() {
             <select name="about" className="field">
               <option>A piece</option>
               <option>Sizing</option>
-              <option>An order in this preview</option>
+              <option>A pre-order</option>
               <option>Something else</option>
             </select>
           </label>

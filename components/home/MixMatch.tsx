@@ -4,8 +4,8 @@ import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { ProductVisual } from "@/components/visual/ProductVisual";
 import { getByPiece } from "@/lib/catalog";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { formatPrice } from "@/lib/format";
-import { useStore } from "@/lib/store";
 import type { Product } from "@/lib/types";
 
 const groups = [
@@ -21,8 +21,6 @@ export function MixMatch() {
     jacket: getByPiece("jacket"),
   }), []);
   const [index, setIndex] = useState({ blouse: 0, skirt: 0, jacket: 0 });
-  const { addMany } = useStore();
-
   const chosen = {
     blouse: pool.blouse[index.blouse],
     skirt: pool.skirt[index.skirt],
@@ -75,9 +73,10 @@ export function MixMatch() {
             <p className="mt-2 font-serif text-5xl">{formatPrice(total)}</p>
             <p className="mt-2 max-w-md text-sm text-stone">Three separate catalog pieces. Sets are listed on their own and are not broken into these parts.</p>
           </div>
-          <button className="btn btn-solid" onClick={() => addMany([chosen.blouse.slug, chosen.skirt.slug, chosen.jacket.slug])}>
-            Add the look
-          </button>
+          <WaitlistButton
+            label="Pre-Order Now"
+            productName={`${chosen.blouse.name}, ${chosen.skirt.name}, ${chosen.jacket.name}`}
+          />
         </div>
       </div>
     </section>

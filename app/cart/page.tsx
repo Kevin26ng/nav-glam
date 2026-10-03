@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { ProductVisual } from "@/components/visual/ProductVisual";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 
 export default function CartPage() {
   const { detailed, subtotal, setQty, remove } = useStore();
-  const [demo, setDemo] = useState(false);
 
   return (
     <div className="bg-ivory px-5 pb-20 pt-28 md:px-10">
@@ -51,41 +50,17 @@ export default function CartPage() {
               ))}
             </ul>
             <aside className="h-fit border border-ink/10 p-6">
-              <p className="eyebrow">Checkout</p>
+              <p className="eyebrow">Pre-order</p>
               <div className="mt-4 flex justify-between">
                 <span>Subtotal</span>
                 <span>{formatPrice(subtotal)}</span>
               </div>
-              <p className="mt-3 text-sm text-stone">This is a presentation checkout. No payment will be taken and no order will be placed.</p>
-              <button className="btn btn-solid mt-6 w-full" onClick={() => setDemo(true)}>Continue</button>
-              {demo ? (
-                <form
-                  className="mt-6 space-y-3"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    setDemo(true);
-                  }}
-                >
-                  <p className="font-serif text-3xl">Demo checkout</p>
-                  <input required placeholder="Name" className="field" aria-label="Name" />
-                  <input required type="email" placeholder="Email" className="field" aria-label="Email" />
-                  <input placeholder="City" className="field" aria-label="City" />
-                  <p className="text-sm leading-relaxed">
-                    Payment is not implemented. Submitting this form does not charge a card, reserve stock, or create an order.
-                  </p>
-                  <button
-                    className="btn w-full"
-                    type="button"
-                    onClick={() => {
-                      const status = document.getElementById("demo-status");
-                      if (status) status.textContent = "Recorded only as a demo on this screen. No payment was processed.";
-                    }}
-                  >
-                    Review demo
-                  </button>
-                  <p id="demo-status" role="status" className="text-sm" />
-                </form>
-              ) : null}
+              <p className="mt-3 text-sm text-stone">Join the waitlist for this edit. The first batch is cut from demand.</p>
+              <WaitlistButton
+                label="Pre-Order Now"
+                productName={detailed.map((line) => line.product.name).join(", ")}
+                className="btn btn-solid mt-6 w-full"
+              />
             </aside>
           </div>
         )}

@@ -15,7 +15,7 @@ export function Newsletter() {
     const key = "nav-glam-edit-list";
     const current = JSON.parse(localStorage.getItem(key) ?? "[]") as string[];
     localStorage.setItem(key, JSON.stringify([...new Set([...current, email])]));
-    setNote("Saved on this device. A mailing list is not connected yet, so nothing has been sent.");
+    setNote("You're on the list. We'll write when the first batch drops.");
     setEmail("");
   }
 

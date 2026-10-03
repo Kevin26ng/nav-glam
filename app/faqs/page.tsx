@@ -8,7 +8,7 @@ const faqs = [
   ["Are the product names final?", "The names match the garments in the photographs: Neel Mandala, Hathi Mor, Ivory Paisley and the rest. The line under each name is the category."],
   ["Which prices are real?", "The prices shown follow the house list: ₹1,250 to ₹4,200. They are not discounts, and no crossed-out price is shown."],
   ["What is in a set?", "A lehenga set is shown as choli, flare and, where photographed, a dupatta. Blouses, the jacket and skirts are also sold on their own."],
-  ["Is checkout live?", "No. The bag works on this device. The checkout screen is a demo and does not take payment."],
+  ["How do I order?", "Join the waitlist on any piece. We cut the first batch from those pre-orders and write to you when it drops."],
   ["Are the photographs of the clothes?", "Yes. Every piece in the shop uses a photograph of that garment."],
 ];
 

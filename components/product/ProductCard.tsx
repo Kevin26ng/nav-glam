@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { Heart } from "lucide-react";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import type { Product } from "@/lib/types";
 
 export function ProductCard({ product }: { product: Product }) {
-  const { add, toggleWish, wished, setQuickView } = useStore();
+  const { toggleWish, wished, setQuickView } = useStore();
   const saved = wished(product.slug);
   const photo = product.images[0];
   const hover = product.images[1];
@@ -37,7 +38,7 @@ export function ProductCard({ product }: { product: Product }) {
           <Heart size={16} strokeWidth={1.5} fill={saved ? "currentColor" : "none"} />
         </button>
         <div className="absolute inset-x-0 bottom-0 flex gap-2 p-3 opacity-100 md:translate-y-2 md:opacity-0 md:transition md:group-hover:translate-y-0 md:group-hover:opacity-100 md:group-focus-within:translate-y-0 md:group-focus-within:opacity-100">
-          <button className="btn btn-solid flex-1" onClick={() => add(product.slug)}>Quick add</button>
+          <WaitlistButton label="Pre-Order Now" productName={product.name} className="btn btn-solid min-w-0 flex-1 px-2 text-center leading-tight" />
           <button className="btn bg-ivory/90" onClick={() => setQuickView(product.slug)}>View</button>
         </div>
       </div>

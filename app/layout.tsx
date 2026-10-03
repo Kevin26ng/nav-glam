@@ -6,7 +6,9 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { QuickView } from "@/components/product/QuickView";
 import { SearchDialog } from "@/components/search/SearchDialog";
 import { brandLogoSrc } from "@/lib/brand";
+import { WaitlistModal } from "@/components/waitlist/WaitlistModal";
 import { StoreProvider } from "@/lib/store";
+import { WaitlistProvider } from "@/lib/waitlist";
 import { brand, siteUrl } from "@/lib/site";
 import "./globals.css";
 
@@ -62,13 +64,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full bg-ivory text-ink">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(organization) }} />
         <StoreProvider>
-          <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[90] focus:bg-ivory focus:px-3 focus:py-2">Skip to content</a>
-          <SiteHeader logoSrc={logoSrc} />
-          <CartDrawer />
-          <SearchDialog />
-          <QuickView />
-          <main id="main">{children}</main>
-          <SiteFooter />
+          <WaitlistProvider>
+            <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[90] focus:bg-ivory focus:px-3 focus:py-2">Skip to content</a>
+            <SiteHeader logoSrc={logoSrc} />
+            <CartDrawer />
+            <SearchDialog />
+            <QuickView />
+            <WaitlistModal />
+            <main id="main">{children}</main>
+            <SiteFooter />
+          </WaitlistProvider>
         </StoreProvider>
       </body>
     </html>

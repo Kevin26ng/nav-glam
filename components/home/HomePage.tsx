@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { MixMatch } from "@/components/home/MixMatch";
+import { WhyNav } from "@/components/home/WhyNav";
 import { ProductCard } from "@/components/product/ProductCard";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { getFeatured, products } from "@/lib/catalog";
 import { collections, homeMoods } from "@/lib/collections";
 import { journal } from "@/lib/journal";
@@ -48,8 +50,8 @@ export function HomePage() {
               Lehengas, free-size blouses, a koti and skirts — the cloth in the photographs, cut for a wardrobe that also owns denim and a night out.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <Link href="/shop" className="btn">Shop the edit</Link>
-              <Link href="/lookbook" className="btn border-ivory/40">Open the lookbook</Link>
+              <WaitlistButton label="Pre-Order Now" className="btn" />
+              <Link href="/shop" className="btn border-ivory/40">Shop the edit</Link>
             </div>
           </div>
           <div className="grid min-h-[56svh] grid-cols-2 grid-rows-2 lg:min-h-[100svh]">
@@ -67,6 +69,8 @@ export function HomePage() {
           </div>
         </div>
       </section>
+
+      <WhyNav />
 
       <section className="overflow-hidden bg-ink" aria-label="The collection, in motion">
         <div className="marquee-track">

@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 import { OverlayDialog } from "@/components/ui/OverlayDialog";
 import { ProductVisual } from "@/components/visual/ProductVisual";
+import { WaitlistButton } from "@/components/waitlist/WaitlistButton";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 
@@ -67,8 +68,11 @@ export function CartDrawer() {
             <span className="eyebrow">Subtotal</span>
             <span>{formatPrice(subtotal)}</span>
           </div>
-          <p className="mt-2 text-xs text-stone">Shipping is not calculated. Payment is not connected in this preview.</p>
-          <Link href="/cart" onClick={() => setCartOpen(false)} className="btn btn-solid mt-4 w-full">Checkout</Link>
+          <WaitlistButton
+            label="Pre-Order Now"
+            productName={detailed.map((line) => line.product.name).join(", ")}
+            className="btn btn-solid mt-4 w-full"
+          />
         </div>
       ) : null}
     </OverlayDialog>
