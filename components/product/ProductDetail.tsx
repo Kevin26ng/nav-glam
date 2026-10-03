@@ -5,59 +5,51 @@ import { useState } from "react";
 import { Heart, X } from "lucide-react";
 import { ProductCard } from "@/components/product/ProductCard";
 import { OverlayDialog } from "@/components/ui/OverlayDialog";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
-import type { StudyVariant } from "@/lib/studies";
 import type { Product } from "@/lib/types";
-
-const views: Array<{ id: StudyVariant; label: string }> = [
-  { id: "portrait", label: "Full" },
-  { id: "detail", label: "Detail" },
-  { id: "textile", label: "Textile" },
-];
 
 export function ProductDetail({ product, related }: { product: Product; related: Product[] }) {
   const { add, toggleWish, wished } = useStore();
   const [qty, setQty] = useState(1);
-  const [view, setView] = useState<StudyVariant>("portrait");
+  const [active, setActive] = useState(0);
   const [zoom, setZoom] = useState(false);
   const [open, setOpen] = useState<"story" | "details" | "shipping" | "returns">("story");
-  const photo = product.images[0];
+  const photos = product.images;
+  const photo = photos[active] ?? photos[0];
 
   return (
     <div className="bg-ivory pt-24">
       <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-6 md:px-10 lg:grid-cols-[1.15fr_0.85fr]">
         <div>
-          <div className="relative overflow-hidden bg-mist">
+          <button className="relative block w-full overflow-hidden bg-mist" onClick={() => setZoom(true)} aria-label={`Open a larger photograph of ${product.name}`}>
             {photo ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img src={photo} alt={product.name} className="aspect-[3/4] w-full object-cover" />
-            ) : (
-              <button className="block w-full" onClick={() => setZoom(true)} aria-label="Open larger study">
-                <GarmentStudy study={product.study} silhouette={product.silhouette} variant={view} className="aspect-[3/4] w-full" label={product.name} />
-              </button>
-            )}
-          </div>
-          <div className="mt-3 flex gap-2">
-            {views.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => setView(item.id)}
-                aria-pressed={view === item.id}
-                className={`h-20 w-16 overflow-hidden border ${view === item.id ? "border-ink" : "border-transparent"}`}
-              >
-                <GarmentStudy study={product.study} silhouette={product.silhouette} variant={item.id} className="h-full w-full" label={item.label} />
-              </button>
-            ))}
-          </div>
+            ) : null}
+          </button>
+          {photos.length > 1 ? (
+            <div className="mt-3 flex gap-2">
+              {photos.map((src, index) => (
+                <button
+                  key={src}
+                  onClick={() => setActive(index)}
+                  aria-pressed={active === index}
+                  className={`h-20 w-16 overflow-hidden border ${active === index ? "border-ink" : "border-transparent"}`}
+                >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={src} alt="" className="h-full w-full object-cover" />
+                </button>
+              ))}
+            </div>
+          ) : null}
         </div>
         <div className="lg:pt-6">
           <p className="text-xs uppercase tracking-[0.18em] text-stone">
             <Link href="/shop">Shop</Link> / {product.categoryLabel}
           </p>
           <h1 className="mt-4 font-serif text-5xl leading-none md:text-7xl">{product.name}</h1>
-          <p className="mt-3 text-sm text-stone">Editorial name. Catalog lists this as a {product.categoryLabel.toLowerCase()}.</p>
+          <p className="mt-3 text-sm text-stone">{product.categoryLabel} · {product.colorName}</p>
           <p className="mt-6 text-2xl">{formatPrice(product.price)}</p>
           <p className="mt-6 max-w-md text-sm leading-relaxed">{product.description}</p>
           <ul className="mt-4 flex flex-wrap gap-2">
@@ -92,10 +84,10 @@ export function ProductDetail({ product, related }: { product: Product; related:
               Wishlist
             </button>
           </div>
-          <p className="mt-4 text-xs text-stone">Color shown is an editorial study{product.colorIsEditorial ? `: ${product.colorName}` : ""}. Availability in this preview is not live stock.</p>
+          <p className="mt-4 text-xs text-stone">Photographed in {product.colorName}. Bag and wishlist stay on this device. Checkout does not take payment yet.</p>
           <div className="mt-10 border-t border-ink/10">
             <Accordion id="story" title="The story" open={open} setOpen={setOpen}>
-              <p>{product.description} The name on this page is an editorial placeholder so the house can present the piece before the catalog title is connected.</p>
+              <p>{product.description}</p>
             </Accordion>
             <Accordion id="details" title="Details" open={open} setOpen={setOpen}>
               <ul className="space-y-1">
@@ -119,9 +111,12 @@ export function ProductDetail({ product, related }: { product: Product; related:
           {related.map((item) => <ProductCard key={item.slug} product={item} />)}
         </div>
       </section>
-      <OverlayDialog open={zoom} onOpenChange={setZoom} title={`${product.name} study`} className="inset-4 bg-ink">
-        <button aria-label="Close study" className="absolute right-4 top-4 z-10 bg-ivory p-2" onClick={() => setZoom(false)}><X size={16} /></button>
-        <GarmentStudy study={product.study} silhouette={product.silhouette} variant={view} className="h-full w-full" label={product.name} />
+      <OverlayDialog open={zoom} onOpenChange={setZoom} title={product.name} className="inset-4 bg-ink">
+        <button aria-label="Close photograph" className="absolute right-4 top-4 z-10 bg-ivory p-2" onClick={() => setZoom(false)}><X size={16} /></button>
+        {photo ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img src={photo} alt={product.name} className="h-full w-full object-contain" />
+        ) : null}
       </OverlayDialog>
     </div>
   );

@@ -42,11 +42,10 @@ export function SiteHeader({ logoSrc }: { logoSrc: string | null }) {
     setMobile(false);
   }
 
-  const overHero = pathname === "/" && !scrolled && !mobile;
-  const tone = overHero ? "ivory" : "ivory";
-  const bar = overHero
-    ? "bg-transparent text-ivory"
-    : "bg-ink/88 text-ivory shadow-[0_1px_0_rgba(244,239,230,0.08)] backdrop-blur-md";
+  const tone = "ivory";
+  const bar = scrolled
+    ? "bg-ink/92 text-ivory shadow-[0_1px_0_rgba(244,239,230,0.08)] backdrop-blur-md"
+    : "bg-ink/80 text-ivory backdrop-blur-md";
 
   return (
     <header className={cn("fixed inset-x-0 top-0 z-50 transition-[background,height,box-shadow] duration-300", bar)}>

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
+import { ProductVisual } from "@/components/visual/ProductVisual";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 
@@ -24,7 +24,7 @@ export default function CartPage() {
             <ul className="space-y-6">
               {detailed.map((line) => (
                 <li key={line.slug} className="grid grid-cols-[104px_1fr] gap-4 border-b border-ink/10 pb-6">
-                  <GarmentStudy study={line.product.study} silhouette={line.product.silhouette} className="h-36 w-full" label={line.product.name} />
+                  <div className="overflow-hidden bg-mist"><ProductVisual product={line.product} className="h-36 w-full object-cover" /></div>
                   <div>
                     <div className="flex justify-between gap-3">
                       <div>

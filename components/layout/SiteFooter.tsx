@@ -65,7 +65,7 @@ export function SiteFooter() {
           ))}
         </div>
         <p className="mt-14 max-w-xl text-sm leading-relaxed text-ivory/60">
-          A presentation build of the house site. Editorial names stand in until catalog titles are connected. Product studies stand in until photography is placed in the public products folder. Social profiles are not linked yet.
+          UH presents नव GLAM. The photographs are the current cloth: lehengas, blouses, the Hathi Mor jacket and skirts. Checkout on this site does not take payment yet. Social profiles are not linked yet.
         </p>
         <p className="mt-6 text-xs tracking-[0.18em] uppercase text-ivory/45">© {new Date().getFullYear()} UH presents नव GLAM</p>
       </div>

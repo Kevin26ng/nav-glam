@@ -243,8 +243,7 @@ function FilterGroups({
         </div>
       </fieldset>
       <fieldset>
-        <legend className="eyebrow">Color study</legend>
-        <p className="mt-2 text-xs text-stone">Editorial color, until catalog color is confirmed.</p>
+        <legend className="eyebrow">Color</legend>
         <div className="mt-3 flex flex-wrap gap-2">
           {colorOptions.map(([name, study]) => (
             <button

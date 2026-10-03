@@ -28,7 +28,8 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     "@context": "https://schema.org",
     "@type": "Product",
     name: product.name,
-    description: `${product.description} Editorial placeholder name. Catalog category: ${product.categoryLabel}.`,
+    description: product.description,
+    image: product.images[0] ? `${siteUrl}${product.images[0]}` : undefined,
     category: product.categoryLabel,
     sku: product.id,
     offers: {

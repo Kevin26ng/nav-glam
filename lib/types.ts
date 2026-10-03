@@ -25,9 +25,8 @@ export type Category =
 
 export type Product = {
   id: string;
-  /** Editorial placeholder. Not a confirmed catalog title. */
   name: string;
-  nameIsPlaceholder: true;
+  nameIsPlaceholder: boolean;
   slug: string;
   category: Category;
   /** Factual label from the supplied catalog structure. */
@@ -46,8 +45,8 @@ export type Product = {
   catalogNotes: string[];
   sizes: string[];
   colorName: string;
-  /** Color is an editorial study until catalog color is confirmed. */
-  colorIsEditorial: true;
+  /** True only when the swatch is an editorial stand-in rather than the cloth in the photograph. */
+  colorIsEditorial: boolean;
   tags: Array<"NEW" | "EDITED">;
   keywords: string[];
   collection: string;

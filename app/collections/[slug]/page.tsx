@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { ProductCard } from "@/components/product/ProductCard";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
 import { collections, getCollection } from "@/lib/collections";
 
 export function generateStaticParams() {
@@ -22,10 +21,12 @@ export default async function CollectionPage({ params }: { params: Promise<{ slu
   const collection = getCollection(slug);
   if (!collection) notFound();
   const items = collection.products();
+  const cover = items.find((product) => product.images[0])?.images[0] ?? "/products/rang-mahal.jpg";
   return (
     <div className="bg-ivory">
       <section className="relative min-h-[70svh] bg-ink text-ivory">
-        <GarmentStudy study={collection.study} silhouette="set" className="absolute inset-0 h-full w-full opacity-80" label={collection.title} />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={cover} alt="" className="kenburns absolute inset-0 h-full w-full object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/20" />
         <div className="relative mx-auto flex min-h-[70svh] max-w-[1500px] flex-col justify-end px-5 pb-12 pt-32 md:px-10">
           <p className="eyebrow text-gold">{collection.kicker}</p>

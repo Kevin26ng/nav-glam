@@ -1,8 +1,8 @@
 # नव GLAM
 
-The house site for **UH presents नव GLAM** — a modern Indian wardrobe of sets, blouses, jackets and skirts.
+The house site for **UH presents नव GLAM** — a modern Indian wardrobe of lehenga sets, free-size blouses, an embroidered jacket and flared skirts.
 
-Indian heritage, rewritten for now. Editorial type, a charcoal and ivory ground, gold used only as a signature, and a catalog you can actually shop: filters, search, wishlist, bag, and a blouse + skirt + jacket look builder.
+Indian heritage, rewritten for now. The shop uses the real garment photographs: filters, search, wishlist, bag, and a blouse + skirt + jacket look builder.
 
 ## Run
 
@@ -17,14 +17,11 @@ The dev server in this project is started on port **3847**.
 npx next dev -p 3847 -H 0.0.0.0
 ```
 
-## Connect the real brand files
+## Photographs
 
-The logo and catalog photography were not in the repository when this site was built.
+Each piece in `lib/catalog.ts` points at a file in `public/products/`. Those files are the dresses, blouses, jacket and skirts supplied for the house.
 
-- Place the supplied logo at `public/brand/nav-glam-logo.png` (or `.svg`). The header and footer wordmark swap to that file. It is not redrawn.
-- Place photography at `public/products/…` and set each product’s `images` array in `lib/catalog.ts`, for example `["/products/nav-edit-01.jpg", "/products/nav-edit-01-b.jpg"]`. Empty arrays render an editorial color study instead of a stock photo.
-
-Editorial names (Nav Edit 01, Heritage Bloom, and the rest) are placeholders. The category line on each piece is the catalog fact: 3-piece set, free-size blouse, 15m-flare skirt, skirt-side stitching, and so on. Prices are taken from the supplied list (₹1,250–₹4,200).
+Prices follow the house list (₹1,250–₹4,200).
 
 ## What is not live
 

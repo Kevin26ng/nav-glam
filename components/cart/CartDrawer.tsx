@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Minus, Plus, X } from "lucide-react";
 import { OverlayDialog } from "@/components/ui/OverlayDialog";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
+import { ProductVisual } from "@/components/visual/ProductVisual";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 
@@ -35,7 +35,7 @@ export function CartDrawer() {
             {detailed.map((line) => (
               <li key={line.slug} className="grid grid-cols-[88px_1fr] gap-3">
                 <Link href={`/product/${line.slug}`} onClick={() => setCartOpen(false)} className="block overflow-hidden bg-mist">
-                  <GarmentStudy study={line.product.study} silhouette={line.product.silhouette} className="h-28 w-full" label={line.product.name} />
+                  <ProductVisual product={line.product} className="h-28 w-full object-cover" />
                 </Link>
                 <div>
                   <div className="flex items-start justify-between gap-3">

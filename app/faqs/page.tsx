@@ -5,11 +5,11 @@ export const metadata: Metadata = { title: "FAQs", description: "Questions the �
 
 const faqs = [
   ["What is नव GLAM?", "The consumer-facing fashion identity presented by UH. A modern Indian wardrobe of sets, blouses, jackets and skirts."],
-  ["Are the product names final?", "No. Names such as Nav Edit 01, Heritage Bloom and Midnight Muse are editorial placeholders. The catalog category on each piece is the factual label."],
-  ["Which prices are real?", "The prices shown are taken from the supplied list: ₹1,250 to ₹4,200. They are not discounts, and no crossed-out price is shown."],
-  ["What needs stitching?", "Some 3-piece sets require skirt-side stitching. Riwaayat carries that note."],
+  ["Are the product names final?", "The names match the garments in the photographs: Neel Mandala, Hathi Mor, Ivory Paisley and the rest. The line under each name is the category."],
+  ["Which prices are real?", "The prices shown follow the house list: ₹1,250 to ₹4,200. They are not discounts, and no crossed-out price is shown."],
+  ["What is in a set?", "A lehenga set is shown as choli, flare and, where photographed, a dupatta. Blouses, the jacket and skirts are also sold on their own."],
   ["Is checkout live?", "No. The bag works on this device. The checkout screen is a demo and does not take payment."],
-  ["Where are the photographs?", "Catalog photography was not in the project files. Color studies hold the frames until images are added under public/products."],
+  ["Are the photographs of the clothes?", "Yes. Every piece in the shop uses a photograph of that garment."],
 ];
 
 export default function Page() {

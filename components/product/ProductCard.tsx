@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Heart } from "lucide-react";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
 import type { Product } from "@/lib/types";
@@ -20,26 +19,11 @@ export function ProductCard({ product }: { product: Product }) {
           {photo ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={photo} alt={product.name} className="study-zoom h-full w-full object-cover" />
-          ) : (
-            <GarmentStudy
-              study={product.study}
-              silhouette={product.silhouette}
-              className="study-zoom h-full w-full"
-              label={`${product.name}, ${product.categoryLabel}`}
-            />
-          )}
-          {!photo && hover ? null : hover ? (
+          ) : null}
+          {hover ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={hover} alt="" className="absolute inset-0 hidden h-full w-full object-cover group-hover:block" />
-          ) : (
-            <GarmentStudy
-              study={product.study}
-              silhouette={product.silhouette}
-              variant="detail"
-              className="absolute inset-0 hidden h-full w-full group-hover:block"
-              label=""
-            />
-          )}
+          ) : null}
         </Link>
         {product.tags[0] ? (
           <span className="absolute left-3 top-3 bg-ivory/90 px-2 py-1 text-[0.58rem] tracking-[0.18em]">{product.tags[0]}</span>

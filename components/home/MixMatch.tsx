@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
+import { ProductVisual } from "@/components/visual/ProductVisual";
 import { getByPiece } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
@@ -47,7 +47,7 @@ export function MixMatch() {
   }
 
   return (
-    <section className="bg-paper py-20 md:py-28">
+    <section className="bg-paper py-12 md:py-16">
       <div className="mx-auto max-w-[1500px] px-5 md:px-10">
         <p className="eyebrow text-bronze">Style it your way</p>
         <div className="mt-4 flex flex-wrap items-end justify-between gap-6">
@@ -98,7 +98,7 @@ function PiecePicker({
   return (
     <div className="bg-ivory">
       <div className="overflow-hidden">
-        <GarmentStudy study={product.study} silhouette={product.silhouette} className="aspect-[3/4] w-full" label={product.name} />
+        <ProductVisual product={product} className="aspect-[3/4] w-full object-cover" />
       </div>
       <div className="flex items-center justify-between gap-3 px-4 py-4">
         <button aria-label={`Previous ${label}`} onClick={onPrev} className="grid h-9 w-9 place-items-center border border-ink/15"><ChevronLeft size={16} /></button>

@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const sections = [
   { id: "heritage", kicker: "Heritage", title: "India has never stood still.", body: "Neither should fashion. The clothes in this house start from silhouettes this country already knows — the set, the blouse, the flare — and refuse to freeze them in one kind of occasion." },
   { id: "form", kicker: "Form", title: "The cut is the craft.", body: "A three-piece set can be worn whole. The blouse can leave. The jacket can arrive later. Where the catalog asks for skirt-side stitching, that is part of the form, and it is said on the piece." },
-  { id: "color", kicker: "Color", title: "Rang, without the costume.", body: "Rani, emerald, midnight, saffron, ivory. Color is the first language. On this site, until catalog photography is connected, color is shown as a study — not as a claimed dye lot." },
+  { id: "color", kicker: "Color", title: "Rang, without the costume.", body: "Rani, forest, midnight, saffron, ivory. Color is the first language, and it is the cloth in the photograph — not a swatch standing in for a garment." },
   { id: "movement", kicker: "Movement", title: "How to style a 3-piece set.", body: "Wear the three together when the room asks for it. For a day out, keep the skirt and a free-size blouse. When the hour changes, add the jacket. Build the same idea in Style it your way." },
   { id: "self", kicker: "Self expression", title: "Wear the story. Make it yours.", body: "The customer is not being cast in a wedding, a festival, or a trend. She is being handed Indian clothes that can sit next to the rest of her wardrobe." },
   { id: "future", kicker: "The future of Indian dressing", title: "Not old. Not new. Nav.", body: "नव is the direction: forward, still rooted. This page does not invent a founder, a factory, a certificate or a famous wearer. The point of view is the wardrobe." },
@@ -18,13 +18,19 @@ const sections = [
 export default function StoryPage() {
   return (
     <div className="bg-ivory">
-      <header className="px-5 pb-16 pt-32 md:px-10 md:pt-40">
-        <p className="eyebrow text-bronze">The story</p>
-        <h1 className="mt-4 max-w-5xl font-serif text-6xl leading-[0.9] md:text-8xl">An old language. A new silhouette.</h1>
+      <header className="grid bg-ink text-ivory lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="px-5 pb-12 pt-28 md:px-10 md:pt-36">
+          <p className="eyebrow text-gold">The story</p>
+          <h1 className="mt-4 max-w-3xl font-serif text-6xl leading-[0.9] md:text-8xl">An old language. A new silhouette.</h1>
+        </div>
+        <div className="relative min-h-[60vw] lg:min-h-full">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/products/safed-kadhai.jpg" alt="Safed Kadhai lehenga" className="h-full w-full object-cover lg:absolute lg:inset-0" />
+        </div>
       </header>
       {sections.map((section, index) => (
         <section key={section.id} id={section.id} className={index % 2 ? "bg-ink text-ivory" : "bg-ivory"}>
-          <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-20 md:grid-cols-2 md:px-10 md:py-28">
+          <div className="mx-auto grid max-w-[1500px] gap-8 px-5 py-12 md:grid-cols-2 md:px-10 md:py-16">
             <p className={`eyebrow ${index % 2 ? "text-gold" : "text-bronze"}`}>{section.kicker}</p>
             <div>
               <h2 className="font-serif text-5xl leading-none md:text-6xl">{section.title}</h2>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { X } from "lucide-react";
 import { OverlayDialog } from "@/components/ui/OverlayDialog";
-import { GarmentStudy } from "@/components/visual/GarmentStudy";
+import { ProductVisual } from "@/components/visual/ProductVisual";
 import { getProduct } from "@/lib/catalog";
 import { formatPrice } from "@/lib/format";
 import { useStore } from "@/lib/store";
@@ -21,7 +21,7 @@ export function QuickView() {
     >
       {product ? (
         <>
-          <GarmentStudy study={product.study} silhouette={product.silhouette} className="h-80 w-full md:h-full" label={product.name} />
+          <ProductVisual product={product} className="h-80 w-full object-cover md:h-full" />
           <div className="relative p-6 md:p-8">
             <button aria-label="Close quick view" className="absolute right-4 top-4 p-2" onClick={() => setQuickView(null)}>
               <X size={18} strokeWidth={1.4} />

@@ -27,7 +27,7 @@ export function SearchDialog() {
       open={searchOpen}
       onOpenChange={setSearchOpen}
       title="Search the edit"
-      description="Search editorial names, categories, colors and moods"
+      description="Search names, categories, colors and moods"
       className="left-1/2 top-[10vh] w-[min(720px,calc(100%-1.5rem))] -translate-x-1/2"
     >
       <div className="flex items-center gap-3 border-b border-ink/10 px-5">
