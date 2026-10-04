@@ -15,25 +15,42 @@ export function Logo({
 }) {
   const color = tone === "ivory" ? "text-ivory" : "text-ink";
   return (
-    <Link href="/" className={cn("logo-lockup items-center", color)} aria-label="नव GLAM home">
+    <Link href="/" className={cn("logo-lockup items-center gap-2", color)} aria-label="UH home">
       {src ? (
         <Image
           src={src}
-          alt="नव GLAM"
-          width={compact ? 120 : 168}
-          height={compact ? 48 : 68}
+          alt="UH monogram"
+          width={compact ? 52 : 62}
+          height={compact ? 40 : 48}
           priority={priority}
-          className={cn("w-auto object-contain", compact ? "h-9" : "h-12 md:h-14")}
+          className={cn("w-auto object-contain", compact ? "h-8" : "h-9 md:h-10")}
         />
       ) : (
-        <span className={cn("flex flex-col items-center leading-none", compact ? "gap-0.5" : "gap-1")}>
-          <span className="font-sans text-[0.52rem] tracking-[0.42em] uppercase opacity-80">UH presents</span>
-          <span className="flex items-baseline gap-1.5">
-            <span className={cn("font-deva font-medium", compact ? "text-lg" : "text-2xl")}>नव</span>
-            <span className={cn("font-serif tracking-[0.16em]", compact ? "text-lg" : "text-[1.65rem]")}>GLAM</span>
-          </span>
-        </span>
+        <svg
+          viewBox="0 0 88 68"
+          aria-hidden="true"
+          className={cn("w-auto shrink-0", compact ? "h-8" : "h-9 md:h-10")}
+        >
+          <defs>
+            <linearGradient id="uh-mark-gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stopColor="#e6c68e" />
+              <stop offset="0.48" stopColor="#b88a4a" />
+              <stop offset="1" stopColor="#795b36" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M7 7h17v29c0 14 7 22 20 22s20-8 20-22V7h17v30c0 23-14 35-37 35S7 60 7 37V7Z"
+            fill="none"
+            stroke="url(#uh-mark-gold)"
+            strokeWidth="5"
+          />
+          <path
+            d="M47 7h16v22h18v14H63v23H47V43H30V29h17V7Z"
+            fill="url(#uh-mark-gold)"
+          />
+        </svg>
       )}
+      <span className={cn("font-serif font-medium leading-none", compact ? "text-2xl" : "text-[1.8rem] md:text-[2rem]")}>UH</span>
     </Link>
   );
 }
